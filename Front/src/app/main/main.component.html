@@ -1,0 +1,66 @@
+
+<div class="header-page">
+<ng-container *ngIf="isMobile; then mobile; else desktop"></ng-container>
+</div>
+
+<ng-template #mobile>
+    <nav class="navbar navbar-default bg-patacon">
+        <div class="container-fluid">
+          <a class="navbar-brand"><img src="../../assets/Images/mainlogo.png" alt="Logo Patacon"></a>
+
+          <div class="navbar-header">
+            <button mat-button class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed" ><mat-icon class="white-icon">menu</mat-icon></button>  
+          </div>
+          <div class="collapse navbar-collapse text-toggle-menu" [collapse]="isCollapsed">
+            <ul class="nav navbar-nav">
+
+                <li class="m-1"><a routerLink="/index"><mat-icon class="white-icon">home</mat-icon> <span style="color:white"> Home</span></a></li>
+                <li class="m-1"><a routerLink="/servicios"> <span style="color:white"> Servicio</span></a></li>
+                <li class="m-1"><a > <span style="color:white"> Acerca de</span></a></li>
+                <li class="m-1"><a routerLink="/login"> <span style="color:white"> Sistema</span></a></li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+</ng-template>
+
+
+
+<ng-template #desktop>
+    <div class="bg-patacon" fxLayout="row" fxLayoutGap="10px">
+        <div fxFlex='20%' >
+          <img src="../../assets/Images/mainlogo.png" alt="Logo Patacon">
+        </div>
+        <div fxFlex='20%' fxFlexOffset="60%"> 
+        <div>
+    
+        </div>   
+        </div>
+      </div>
+      <!--<nav class="navbar navbar-expand-lg bg-white nav-shadow">
+          <div class="container">
+              <div class="navbar-collapse collapse" id="navbar10">
+                  <ul class="navbar-nav nav-fill w-100">
+                      <li class="nav-item">
+                          <a class="nav-link" routerLink="/index"><span><mat-icon >home</mat-icon> Home</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" routerLink="/servicios"><span><mat-icon></mat-icon> Servicios</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" routerLink="#"><span><mat-icon ></mat-icon> Acerca de</span> </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" routerLink="/login"><span><mat-icon></mat-icon> Sistema</span></a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>-->
+</ng-template>
+
+
+<router-outlet>
+        <app-loader></app-loader>
+</router-outlet>

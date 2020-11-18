@@ -1,0 +1,167 @@
+<div>
+    <mat-card  class="mt-3">
+      <mat-card-header>
+        <mat-card-title>
+          Lista de Supervisores.
+        </mat-card-title>
+      </mat-card-header>
+
+    <div [hidden]="dataSource.data.length <= 0">
+      <mat-card-content class="pata-form">
+        <div 
+        class="w-100" 
+        fxLayout="row"
+        fxLayout.md="row" 
+        fxLayout.lt-md="row"
+        fxLayout.xs="column"
+        fxFlexFill
+          class="topbar" fxLayoutGap="10px">
+          <div class="back-div form-theme"
+          [fxFlex]="inputFocus?100:37" 
+          [fxFlex.lt-md]="inputFocus?100:30"
+          [fxFlex.xl]="inputFocus?100:30" 
+          [fxFlex.lg]="inputFocus?100:30" 
+          [fxFlex.md]="inputFocus?100:40" 
+          [fxFlex.sm]="inputFocus?100:60"
+          [fxFlex.xs]="100"
+          >
+            <mat-form-field
+            [floatLabel]="placeholder.value.floatLabel"
+            >
+            <mat-label><mat-icon>search</mat-icon><i> Búsqueda de supervisores</i></mat-label>
+              <input matInput (keyup)="applyFilter($event.target.value)"
+              (blur)="inputFocus=false" (focus)="inputFocus=true"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <div
+        class="w-100 mb-3" 
+        fxLayout="row"
+        fxLayout.md="row" 
+        fxLayout.lt-md="row"
+        fxLayout.xs="column"
+        fxFlexFill 
+        >
+          <div fxFlex="100 mat-radio-panel">
+              <mat-accordion class="">
+                  <mat-expansion-panel (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <mat-icon>search</mat-icon> <strong>Búsqueda avanzada</strong>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                
+                    
+                      
+
+                      <form [formGroup]="radiobuttonForm"> 
+                            <mat-radio-group formControlName="option" name="radioButtons">
+                                <mat-radio-button (change)="applyFilter('')" value="1"><strong>Todos</strong></mat-radio-button>
+                                <mat-radio-button class="user-activo" (change)="customFilter(1)" value="2"><strong>Activos</strong></mat-radio-button>
+                                <mat-radio-button class="user-inactivo" (change)="customFilter(0)" value="3"><strong>Inactivo</strong></mat-radio-button>
+                            </mat-radio-group>
+                      </form>
+
+                  </mat-expansion-panel>
+                </mat-accordion>
+
+          </div>
+        </div>
+        <div>
+            <div class="back-div form-theme" fxFlex="10" fxFlex.lt-md="10" fxFlex.md="10" fxFlex.xs="100">
+                <button class="add-button" mat-button (click)="newSupervisor()"> <mat-icon>add</mat-icon> Nuevo Supervisor</button>
+            </div>
+        </div>
+      </mat-card-content>
+      <mat-card-footer class="m-3">
+        <div class="pata-table mb-2 despacho">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+            <ng-container matColumnDef="number">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>N°</th>
+              <td mat-cell *matCellDef="let element; let i = index">{{i+1}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo </th>
+                <td mat-cell *matCellDef="let element">{{element.correo}}</td>
+              </ng-container>
+
+            <ng-container matColumnDef="names">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres</th>
+              <td mat-cell *matCellDef="let element">{{
+                (element.nombres + ' ' + element.apellido_paterno) || '-'
+              }}</td>
+            </ng-container>        
+  
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono </th>
+                <td mat-cell *matCellDef="let element">{{element.telefono || '-'}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="state">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado </th>
+                  <td mat-cell *matCellDef="let element">
+                  <!--<span [ngClass]="element.estado == 1?'user-activo':'user-inactivo'"><strong>{{
+                    element.estado==1?'Activo':'Inactivo'
+                  }}</strong></span>-->
+                  <div 
+                  fxLayout="column"
+                  fxLayoutGap="8px"
+                  >
+                  <div fxFlex="100%">
+                      <button mat-stroked-button (click)="changeState(element)" [matTooltip]="element.estado == 1? '¿Desea deshabilitar?':'¿Desea Habilitar?'"> 
+                        <mat-icon [ngClass]="element.estado == 1?'user-activo':'user-inactivo'" >{{element.estado == 1?'toggle_on':'toggle_off
+                            '}}</mat-icon> {{element.estado == 1?'Activo':'Inactivo'}}
+                      </button>
+                  </div>
+                  </div>
+                </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Acciones </th>
+                    <td mat-cell *matCellDef="let element">
+                    
+                      <div 
+                      fxLayout="column"
+                      fxLayoutGap="8px"
+                      >
+                      <div fxFlex="100%">
+                          <button mat-stroked-button (click)="setSupervisor(element)" matTooltip="Modíficar perfil"> <mat-icon>border_color</mat-icon> </button>
+                      </div>
+                      </div>
+                    </td>
+                </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </mat-card-footer>
+
+</div>
+
+      <div class="notdata-block pata-form" [hidden]="dataSource.data.length > 0">
+          <div class="back-div form-theme mb-3" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="15px">
+              <button class="add-button" mat-button (click)="newSupervisor()"> <mat-icon>border_color</mat-icon> Nuevo Supervisor</button>
+
+      </div>  
+        
+        
+        
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+              <div fxFlex.lg="20" fxFlex.xl="20" fxFlex="40">
+                  <img src="../../../../assets/Images/nodata.png" class="img-fluid" alt="">
+              </div>
+              <div xFlex.lg="80" fxFlex.xl="80" fxFlex="60" class="message">
+                  <h1>No hay rutas ingresadas.</h1>
+              </div>
+          </div>
+      </div>
+
+
+      </mat-card>
+  </div>

@@ -1,0 +1,62 @@
+.list-event {
+    width: 250px;
+    list-style-type: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.card-event {
+    position: absolute;
+    top: 20px;
+}
+
+.fab-button-events {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
+.item-card-event {
+    width: 100%;
+    background: white;
+    color: black;
+    margin-left: 0%;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.item-card-title-event {
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0%;
+}
+
+.item-card-content-event {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 12.5px;
+}
+
+.scrollable {
+    overflow: auto;
+    box-sizing: border-box;
+    height: 490px;
+    scrollbar-width: 1px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: silver;
+    background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)
+}

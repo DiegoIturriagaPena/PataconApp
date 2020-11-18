@@ -1,0 +1,10 @@
+{
+    "name": "db",
+    "connector": "mysql",
+    "url": "",
+    "host": "localhost",
+    "port": 3360,
+    "user": "node_user",
+    "password": "osiris1019!=!)",
+    "database": "db_patacon"
+}

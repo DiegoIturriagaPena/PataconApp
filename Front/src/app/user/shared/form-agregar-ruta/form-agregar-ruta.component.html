@@ -1,0 +1,48 @@
+<mat-card class="card-ruta">
+
+    <h5 mat-card-title style="margin-left: 60px; margin-top: 10px;">Ingrese Datos de Ruta</h5>
+
+
+    <mat-card-content>
+        <form class="w-100" [formGroup]="addRouteForm">
+
+            <mat-form-field>
+                <mat-select [(value)]="selected_productor" (selectionChange)="changeProductor()" formControlName="productor" required>
+                    <mat-option *ngFor="let productor of productores" value="{{productor.id_productor}}">
+                        {{productor.nombre}}
+                    </mat-option>
+
+                </mat-select>
+                <mat-label>Productor</mat-label>
+                <mat-error *ngIf="addRouteForm.get('productor').hasError('required')">
+                    <p [ngStyle]="{'color':red}">Este campo es requerido.</p>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select [(value)]="selected_vinia" (selectionChange)="changeVina()" formControlName="vina" required>
+                    <mat-option *ngFor="let vinia of vinias" value="{{vinia.id_vina}}">
+                        {{vinia.id_vina}} - {{vinia.nombre_vina}}
+                    </mat-option>
+
+                </mat-select>
+                <mat-label>Viña</mat-label>
+                <mat-error *ngIf="addRouteForm.get('vina').hasError('required')">
+                    <p [ngStyle]="{'color':red}">Este campo es requerido.</p>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Duracion estimada</mat-label>
+                <input matInput type="time" placeholder="Duracion estimada de recorrido" [(ngModel)]="duracion_estimada" name="hora_termino" formControlName="duracion" required>
+                <mat-error *ngIf="addRouteForm.get('duracion').hasError('required')">
+                    <p [ngStyle]="{'color':red}">Este campo es requerido.</p>
+                </mat-error>
+            </mat-form-field>
+
+
+        </form>
+    </mat-card-content>
+    <mat-card-actions style="padding:5px;">
+        <div fxFlex></div>
+        <button class="add-button save-route-button" mat-button (click)="createFormControls()" [disabled]="!addRouteForm.valid">Guardar Ruta</button>
+    </mat-card-actions>
+</mat-card>

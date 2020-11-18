@@ -1,0 +1,145 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+    <mat-card style="width: 90%; height: 320px; background: white; color:black;">
+        <mat-card-title style="margin:0px; text-align: center; padding:0%;">Registro historico
+
+            <div class="w-100">
+                <mat-form-field class="w-25" style="float: right; margin-top: 2px; margin-bottom: 2px; margin-right: 30px;">
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha de registro" [formControl]="serializedDate" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <div style="clear: both"></div>
+            </div>
+
+
+        </mat-card-title>
+        <mat-card-content>
+            <mat-grid-list cols="4" rowHeight="150px" gutterSize="10px">
+                <mat-grid-tile (click)="RegistroHistorico(1)" [colspan]="1" [rowspan]="1" style="box-shadow:3px 3px 3px 3px #ccc; border-radius: 10px;">
+                    <mat-grid-tile-header style="background:#216d34;">
+                        Despachos terminados
+                    </mat-grid-tile-header>
+                    <mat-list>
+                        <mat-list-item style="color:black;">
+                            <h4 style="margin-left: 27%; margin-top: 56px">10</h4>
+                        </mat-list-item>
+                        <mat-list-item style="color:black;">
+                            <h6>Despachos</h6>
+                        </mat-list-item>
+
+                    </mat-list>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" style="box-shadow:3px 3px 3px 3px #ccc; border-radius: 10px;">
+                    <mat-grid-tile-header style="background:  #9e1437; ">
+                        <h4>Problemas en despachos</h4>
+                    </mat-grid-tile-header>
+                    <mat-list>
+                        <mat-list-item style="color:black;">
+                            <h4 style="margin-left: 27%; margin-top: 56px">10</h4>
+                        </mat-list-item>
+                        <mat-list-item style="color:black; ">
+                            <h6 style="margin-top: 10px;">Problemas</h6>
+                        </mat-list-item>
+                    </mat-list>
+
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" style="box-shadow:3px 3px 3px 3px #ccc; border-radius: 10px;">
+                    <mat-grid-tile-header style="background:  #ffa318; ">
+                        <h4>SMS Enviados</h4>
+                    </mat-grid-tile-header>
+                    <mat-list>
+                        <mat-list-item style="color:black;">
+                            <h4 style="margin-left: 27%; margin-top: 56px">10</h4>
+                        </mat-list-item>
+                        <mat-list-item style="color:black; ">
+                            <h6 style="margin-top: 10px;">SMS</h6>
+                        </mat-list-item>
+                    </mat-list>
+
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" style="box-shadow:3px 3px 3px 3px #ccc; border-radius: 10px;">
+                    <mat-grid-tile-header style="background:  #ff8018de; ">
+                        <h4>Notificaciones Enviadas</h4>
+                    </mat-grid-tile-header>
+                    <mat-list>
+                        <mat-list-item style="color:black;">
+                            <h4 style="margin-left: 27%; margin-top: 56px">10</h4>
+                        </mat-list-item>
+                        <mat-list-item style="color:black; ">
+                            <h6 style="margin-top: 10px;">Notificaciones</h6>
+                        </mat-list-item>
+                    </mat-list>
+
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+    <mat-card style="width: 90%; background: white; color:black;  height: 405px;">
+
+        <mat-card-title style="margin:0px; text-align: center; padding:0%;">Estadisticas actuales
+        </mat-card-title>
+
+        <mat-card-content>
+            <mat-grid-list cols="2" rowHeight="300px" gutterSize="10px" style="margin-top:20px;">
+                <mat-grid-tile style="box-shadow:3px 3px 3px 3px #ccc; border-radius: 10px;">
+                    <mat-grid-tile-header>
+                        <h3>Estadísticas de Despachos</h3>
+
+                    </mat-grid-tile-header>
+
+                    <mat-list>
+                        <mat-list-item>
+                            <mat-basic-chip style="background-color: #00a74b; color:white; border-radius: 5px; padding-left: 10px; padding-right: 10px;  padding-bottom: 5px; padding-top: 5px; "> 10 </mat-basic-chip>
+                            <mat-basic-chip style="background-color: #bdbdbd; color:rgb(0, 0, 0); border-radius: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">choferes estan disponibles</mat-basic-chip>
+
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            <mat-basic-chip style="background-color: #b85116; color:white; border-radius: 5px; padding-left: 10px; padding-right: 10px;  padding-bottom: 5px; padding-top: 5px; "> 10 </mat-basic-chip>
+                            <mat-basic-chip style="background-color: #bdbdbd; color:rgb(0, 0, 0); border-radius: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">choferes estan en ruta</mat-basic-chip>
+
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            <mat-basic-chip style="background-color: #216d34; color:white; border-radius: 5px; padding-left: 10px; padding-right: 10px;  padding-bottom: 5px; padding-top: 5px; "> 10 </mat-basic-chip>
+                            <mat-basic-chip style="background-color: #bdbdbd; color:rgb(0, 0, 0); border-radius: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">choferes estan saliendo a Patacon</mat-basic-chip>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item>
+                            <mat-basic-chip style="background-color: #1621b8; color:white; border-radius: 5px; padding-left: 10px; padding-right: 10px;  padding-bottom: 5px; padding-top: 5px; "> 3 </mat-basic-chip>
+                            <mat-basic-chip style="background-color: #bdbdbd; color:rgb(0, 0, 0); border-radius: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">choferes estan llegando a Patacon</mat-basic-chip>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+
+                </mat-grid-tile>
+                <mat-grid-tile style="box-shadow:3px 3px 3px 3px #ccc; border-radius: 10px;">
+                    <mat-grid-tile-header>
+                        <h3>Estadísticas de Desvíos</h3>
+                    </mat-grid-tile-header>
+                    <mat-list>
+                        <mat-list-item style="color:black;">
+                            <mat-basic-chip style="background-color: #9e1437; color:white; border-radius: 5px; padding-left: 10px; padding-right: 10px; margin-left:20px; padding-bottom: 5px; padding-top: 5px; "> 2 </mat-basic-chip>
+                            <mat-basic-chip style="background-color: #bdbdbd; color:rgb(0, 0, 0); border-radius: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">desvios del camion PA1234</mat-basic-chip>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item style="color:black;">
+                            <mat-basic-chip style="background-color: #9e1437; color:white; border-radius: 5px; padding-left: 10px; padding-right: 10px; margin-left:20px; padding-bottom: 5px; padding-top: 5px; "> 1 </mat-basic-chip>
+                            <mat-basic-chip style="background-color: #bdbdbd; color:rgb(0, 0, 0); border-radius: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">desvios del camion FD1234</mat-basic-chip>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+
+        </mat-card-content>
+
+
+
+
+    </mat-card>
+</div>

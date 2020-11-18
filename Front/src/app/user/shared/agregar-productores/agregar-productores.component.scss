@@ -1,0 +1,18 @@
+@import '../../../../assets/styles/variable.scss';
+@import '../../../../assets/styles/spinner';
+@import '../../../../assets/styles/app';
+@import '../../../../assets/styles/header';
+@import '../../../../assets/styles/pages';
+@import '../../../../assets/styles/sidebar';
+@import '../../../../assets/styles/responsive';
+.save-button {
+    background-color: rgb(204, 80, 98);
+    color: white;
+    right: 0;
+}
+
+@import "../../../../assets/styles/patacon/forms";
+@import "../../../../assets/styles/patacon/pata";
+::ng-deep .pata-form {
+  @extend %super-form;
+}

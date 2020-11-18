@@ -1,0 +1,55 @@
+/**
+*Botones del header del calendario
+**/
+::ng-deep button {
+    &.fc-button-primary {
+        color: #fff;
+        background-color: #b71c1c;
+        border-color: #a51c1c;
+    }
+    &.fc-button-primary:not(:disabled):active{
+        color: #fff;
+        background-color: #b71c1c;
+        border-color: #a51c1c;
+    }
+    &.fc-button-primary:not(:disabled).fc-button-active{
+        color: #fff;
+        background-color: #811313;
+        border-color: #a51c1c;
+        animation: shadow-pulse 1s infinite;
+    }
+    &.fc-button-primary:hover{
+        color: #b71c1c;
+        background-color: #fff;
+        border-color: black;
+
+    }
+}
+
+/**
+*Eventos
+**/
+::ng-deep td{
+    
+    > a.fc-event{
+        background-color: #b71c1c;
+        color: #fff !important;
+        border-color: black;
+    }
+}
+
+@keyframes shadow-pulse
+{
+     0% {
+          box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+     }
+     100% {
+          box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+     }
+}
+
+@import '../../../../../assets/styles/patacon/forms';
+@import '../../../../../assets/styles/patacon/pata';
+::ng-deep .pata-form{
+  @extend %super-form;
+}

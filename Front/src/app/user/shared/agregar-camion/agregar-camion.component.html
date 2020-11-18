@@ -1,0 +1,89 @@
+<div class="add-camion" style="padding: 5px">
+    <h2 mat-dialog-title>Ingrese Datos Camión</h2>
+    <mat-dialog-content>
+        <form [formGroup]="addCamionGroup">
+            <mat-form-field>
+                <input matInput placeholder="Patente" formControlName="patente" pattern="([A-Z]|[a-z]){2}(([A-Z]|[a-z]){2}|[0-9]{2})[0-9]{2}" oninput="this.value = this.value.toUpperCase()" required maxlength="6">
+                <mat-label>Patente</mat-label>
+                <mat-error *ngIf="addCamionGroup.get('patente').hasError('required')">
+                    <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                </mat-error>
+                <mat-error *ngIf="!addCamionGroup.get('patente').hasError('required')
+                                && addCamionGroup.get('patente').hasError('pattern')">
+                    <p [ngStyle]="{'color': red}">El formato no corresponde a una patente.</p>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="w-100">
+                <mat-form-field>
+                    <mat-label>Selecciona GPS</mat-label>
+                    <mat-select formControlName="gpsSelect">
+                        <mat-option class="selected-item" *ngFor="let gps of listaGPS" [value]="gps.id">
+                            {{gps.modelo}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="w-100">
+                <mat-form-field class="w-100">
+                    <mat-label>Capacidad</mat-label>
+                    <input class="input-color" type="number" matInput placeholder="Capacidad (ton)" formControlName="capacidad" pattern="[1-9][0-9]*" required min="1" max="99999">
+                    <mat-error *ngIf="addCamionGroup.get('capacidad').hasError('required')">
+                        <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                    </mat-error>
+                    <mat-error *ngIf="!addCamionGroup.get('capacidad').hasError('required')
+                            && addCamionGroup.get('capacidad').hasError('pattern')">
+                        <p [ngStyle]="{'color': red}">Revise el tamaño O ingrese solo números.</p>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="w-100">
+                <mat-form-field>
+                    <mat-label>Tipo de Camión</mat-label>
+                    <mat-select formControlName="tipo" required>
+                        <mat-option class="selected-item" value="grande">Grande</mat-option>
+                        <mat-option class="selected-item" value="chico">Chico</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="addCamionGroup.get('tipo').hasError('required')">
+                        <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="w-100">
+                <mat-form-field class="w-100">
+                    <mat-label>Nombre del Dueño</mat-label>
+                    <input class="input-color" matInput placeholder="Nombre del Dueño" formControlName="dueno" required maxlength="60">
+                    <mat-error *ngIf="addCamionGroup.get('dueno').hasError('required')">
+                        <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="w-100">
+                <mat-form-field class="w-100">
+                    <mat-label>Teléfono del Dueño</mat-label>
+                    <input class="input-color" matInput placeholder="Teléfono del Dueño" formControlName="fono_dueno" pattern="(9)[0-9]{8}" required maxlength="9">
+                    <mat-error *ngIf="addCamionGroup.get('fono_dueno').hasError('required')">
+                        <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                    </mat-error>
+                    <mat-error *ngIf="!addCamionGroup.get('fono_dueno').hasError('required')
+                            && addCamionGroup.get('fono_dueno').hasError('pattern')">
+                        <p [ngStyle]="{'color': red}">Ingrese solo números.</p>
+                    </mat-error>
+                    <mat-error *ngIf="!addCamionGroup.get('fono_dueno').hasError('required') 
+                            && addCamionGroup.get('fono_dueno').hasError('pattern')">
+                        <p [ngStyle]="{'color': red}">Formato: 9NNNNNNNN</p>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions style="padding:5px;">
+        <div fxFlex></div>
+        <button class="save-button" mat-button (click)="insertarCamion()" [disabled]="!addCamionGroup.valid">Guardar Camión</button>
+    </mat-dialog-actions>
+</div>

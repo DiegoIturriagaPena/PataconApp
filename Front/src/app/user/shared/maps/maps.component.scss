@@ -1,0 +1,24 @@
+.container-map {
+    position: relative;
+}
+
+agm-map {
+    position: relative;
+    height: 580px !important;
+    width: 100%;
+}
+
+.agm-info-window-content {
+    padding: 10px;
+    width: 170px !important;
+    height: 170px !important;
+}
+
+.tittle-marker {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container-dialog-marker {
+    padding: 10px;
+}

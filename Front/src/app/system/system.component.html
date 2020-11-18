@@ -1,0 +1,39 @@
+<div class="main-container app-dark-theme">
+
+    <mat-toolbar color="primary" class="topbar telative">
+
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                <b>
+                  <img src="../../assets/Images/logo1.png" alt="homepage" class="light-logo" width="70%">
+              </b>
+            </a>
+        </div>
+
+        <button mat-icon-button color="warm" (click)="snav.toggle()" value="sidebarclosed">
+          <mat-icon>menu</mat-icon>
+      </button>
+
+        <span fxFlex></span>
+        <app-header></app-header>
+
+    </mat-toolbar>
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0">
+        <mat-sidenav #snav id="snav" class="dark-sidebar pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'" fixedTopGap="0" [opened]="mobileQuery.matches" [disableClose]="mobileQuery.matches">
+
+            <app-sidebar></app-sidebar>
+
+
+        </mat-sidenav>
+        <mat-sidenav-content class="page-wrapper">
+            <div class="page-content" style=" padding-left: 0px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;">
+                <div>
+                    <div>
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

@@ -1,0 +1,231 @@
+<div class="dialog-form">
+    <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="10px">
+        <div fxFlex="100%">
+            <h2><mat-icon>account_circle</mat-icon>Editar Perfil</h2>
+        </div>
+        <div fxFlex="100%">
+            <mat-card-content calss="card-content">
+
+                <mat-horizontal-stepper [linear]="true" #stepper>
+
+                    <mat-step [stepControl]="primerStep">
+                        <form [formGroup]="primerGroup">
+                            <ng-template matStepLabel>DatosCorporativos</ng-template>
+
+                            <mat-form-field class="mb-2">
+                                <input matInput placeholder="Rut" formControlName="rut" 
+                                pattern="[0-9]{1,2}[0-9]{3}[0-9]{3}(-)([0-9]|(k|K))" required>
+                                <mat-error *ngIf="primerGroup.get('rut').hasError('required')">
+                                    Este campo es <strong>obligatorio</strong>.
+                                </mat-error>
+                                <mat-error *ngIf="!primerGroup.get('rut').hasError('required') && primerGroup.get('rut').hasError('pattern')">
+                                    El formato <strong>no corresponde</strong> a un Rut (Ejemplo: 12345678-9).
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="mb-2">
+                                <input matInput placeholder="Correo" formControlName="correo" required>
+                                <mat-error *ngIf="primerGroup.get('correo').hasError('required')">
+                                    Este campo es <strong>obligatorio</strong>.
+                                </mat-error>
+                                <mat-error *ngIf="!primerGroup.get('correo').hasError('required') && primerGroup.get('correo').hasError('email')">
+                                    Ingrese un <strong>correo</strong> válido.
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div fxLayout="row" fxLayoutAlign="end node" fxLayoutGap="8px">
+                                <div>
+                                    <button mat-button class="mat-raised-button mat-primary" [disabled]="!primerGroup.valid" matStepperNext>Siguiente</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+
+                    <mat-step [stepControl]="segundoStep">
+                        <form [formGroup]="segundoGroup">
+                            <ng-template matStepLabel>Datos personales</ng-template>
+
+                            <mat-form-field class="mb-2">
+                                <input matInput placeholder="Nombre(s)" formControlName="nombres" required>
+                                <mat-error *ngIf="segundoGroup.get('nombres').hasError('required')">
+                                    Este campo es <strong>obligatorio</strong>.
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="mb-2">
+                                <input matInput placeholder="Apellido Paterno" formControlName="apellido_paterno">
+                            </mat-form-field>
+
+                            <mat-form-field class="mb-2">
+                                <input matInput placeholder="Apellido Materno" formControlName="apellido_materno">
+                            </mat-form-field>
+
+                            <mat-form-field class="mb-2">
+                                <input matInput placeholder="Teléfono" formControlName="telefono" pattern="(9)[0-9]{8}">
+                                <mat-error *ngIf="!segundoGroup.get('telefono').hasError('required') && segundoGroup.get('telefono').hasError('pattern')">
+                                    Formato: 9NNNNNNNN
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                                <button mat-button class="mat-raised-button" matStepperPrevious>Regresar</button>
+                                <button mat-button class="mat-raised-button mat-primary" matStepperNext [disabled]="!segundoGroup.valid">Siguiente</button>
+                            </div>
+                        </form>
+                    </mat-step>
+
+                    <mat-step [completed]="tercerStep">
+                        <form [formGroup]="tercerGroup">
+                            <ng-template matStepLabel>Credenciales</ng-template>
+
+                            <form [formGroup]="tercerGroup">
+                                <mat-radio-group formControlName="opcion" name="radioButtons">
+                                    <div fxLayout="row" >
+                                        <div fxFlex="100%">
+                                            <mat-radio-button  value="1">No hacer cambios.</mat-radio-button>
+                                        </div>
+                                      <div fxFlex="100%">
+                                          <mat-radio-button  value="2">Generar contraseña.</mat-radio-button>
+                                      </div>
+                                      <div fxFlex="100%">
+                                          <mat-radio-button  value="3">Cambio manual de contraseña.</mat-radio-button>
+                                      </div>
+                                    </div>
+                                  </mat-radio-group>
+                            </form>
+
+                            <div class="mt-2 mb-2" fxLayout="row" fxLayoutAlign="center center">
+                                <div [ngStyle]="{'color': 'red'}" *ngIf="tercerGroup.get('opcion').value === '2'">
+                                    <h6>Se enviará un correo con las credenciales.</h6>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 mb-2">
+                                <div *ngIf="tercerGroup.get('opcion').value === '3'">
+                                    <form [formGroup]="pwGroup">
+                                        <div fxLayout="column" fxLayoutGap="8pc">
+                                            <mat-form-field fxFlex="100%" class="mb-2">
+                                                <input type="password" matInput placeholder="Ingrese la contraseña." formControlName="password">
+                                                <mat-error *ngIf="pwGroup.get('password').hasError('required')">
+                                                    Este campo es <strong>obligatorio</strong>.
+                                                </mat-error>
+                                                <mat-error *ngIf="!pwGroup.get('password').hasError('required') && pwGroup.get('password').hasError('minLength')">
+                                                    La contraseña debe tener al menos 6 caracteres.
+                                                </mat-error>
+                                            </mat-form-field>
+
+                                            <mat-form-field fxFlex="100%" class="mb-2">
+                                                <input type="password" matInput placeholder="Vuelva a ingresar la contraseña." formControlName="repassword" required>
+                                                <mat-error *ngIf="pwGroup.get('repassword').hasError('required')">
+                                                    Este campo es <strong>obligatorio</strong>.
+                                                </mat-error>
+                                                <mat-error *ngIf="!pwGroup.get('repassword').hasError('required') && pwGroup.get('repassword').hasError('minLength')">
+                                                    La contraseña debe tener al menos 6 caracteres.
+                                                </mat-error>
+                                            </mat-form-field>
+
+                                            <div fxFlex="100%" *ngIf="verifyPass">
+                                                <h6>Ambas contraseñas deben ser iguales.</h6>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                                <button mat-button class="mat-raised-button" matStepperPrevious>Regresar</button>
+                                <button mat-button class="mat-raised-button mat-primary" (click)="goToResume(stepper)" (disabled)="!pwGroup.valid">Siguiente</button>
+                            </div>
+                        </form>                        
+                    </mat-step>
+
+                    <mat-step>
+                        <ng-template matStepLabel>Resumen</ng-template>
+                        
+                        <div fxLayout="column" fxLayoutGap="8px">
+                            <div fxLayout="row" fxLayoutGap="8px">
+                                <div fxFlex="50">
+                                    <span>Rut: </span>
+                                </div>
+                                <div fxFlex="50">
+                                    <span>{{ this.user.rut }}</span>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutGap="8px">
+                                <div fxFlex="50">
+                                    <span>Correo: </span>
+                                </div>
+                                <div fxFlex="50">
+                                    <span>{{ this.user.correo }}</span>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutGap="8px">
+                                <div fxFlex="50">
+                                    <span>Nombre(s): </span>
+                                </div>
+                                <div fxFlex="50">
+                                    <span>{{ this.user.nombres }}</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="this.user.apellido_paterno !== ''" fxLayout="row" fxLayoutGap="8px">
+                                <div fxFlex="50">
+                                    <span>Apellido Paterno: </span>
+                                </div>
+                                <div fxFlex="50">
+                                    <span>{{ this.user.apellido_paterno }}</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="this.user.apellido_materno !== ''" fxLayout="row" fxLayoutGap="8px">
+                                <div fxFlex="50">
+                                    <span>Apellido Materno: </span>
+                                </div>
+                                <div fxFlex="50">
+                                    <span>{{ this.user.apellido_materno }}</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="this.user.telefono !== -1" fxLayout="row" fxLayoutGap="8px">
+                                <div fxFlex="50">
+                                    <span>Teléfono: </span>
+                                </div>
+                                <div fxFlex="50">
+                                    <span>{{ this.user.telefono }}</span>
+                                </div>
+                            </div>
+
+                            <div *ngIf="this.user.password_set" fxLayout="row" fxLayoutGap="8px">
+                                <div fxFlex="50">
+                                    <span>Contraseña automática: </span>
+                                </div>
+                                <div fxFlex="50">
+                                    <span>{{ this.user.password_generated? 'Si': 'No' }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                            <div>
+                                <button mat-button class="mat-raised-button" matStepperPrevious>Regresar</button>
+                            </div>
+                            <div mat-button class="mat-raised-button mat-primary" (click)="save()">Guardar</div>
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </mat-card-content>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="mt-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="10px">
+        <div fxFlex="100%">
+            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                <div>
+                    <button class="mat-raised-button" (click)="close()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

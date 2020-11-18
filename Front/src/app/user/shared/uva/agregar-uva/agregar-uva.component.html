@@ -1,0 +1,48 @@
+<div class="dialog-form">
+    <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="10px">
+        <div fxFlex="100%">
+            <h2>
+                <mat-icon>loyalty</mat-icon> Nuevo tipo de uva</h2>
+        </div>
+        <div class="w-100" fxFlex="100%">
+            <form [formGroup]="primaryform">
+
+                <div fxLayout="column" fxLayoutGap="8px">
+
+                    <div fxFlex="100%">
+                        <mat-form-field class="mb-2">
+                            <input matInput placeholder="Nombre" formControlName="nombre" maxlength="30">
+                            <mat-error *ngIf="primaryform.get('nombre').hasError('required')">
+                                Este campo es <strong>obligatorio</strong> para continuar.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="100%">
+                        <mat-form-field class="mb-2">
+                            <input matInput placeholder="descriptción" formControlName="descriptcion" maxlength="140">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="mb-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                    <div>
+                        <button mat-button class="mat-raised-button mat-primary" (click)="save() ">Guardar</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="mt-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="10px">
+        <div fxFlex="100%">
+            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                <div>
+                    <button class="mat-raised-button" (click)="close()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

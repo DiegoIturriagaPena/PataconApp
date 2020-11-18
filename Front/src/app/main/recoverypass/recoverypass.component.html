@@ -1,0 +1,37 @@
+<div 
+  fxLayout="column" 
+  fxLayoutGap="10px"
+  >
+  <div fxFlex="100%">
+      <h2>Hola!</h2>
+   </div>
+  <div fxFlex="100%">
+    <h5>Tu nueva contraseña sera enviada a tu correo.</h5>
+  </div>
+  <form [formGroup]="primaryform">
+      <div fxFlex="100%">
+          <mat-form-field>
+              <input 
+              matInput
+              formControlName="email"
+              placeholder="Ingrese su correo">
+            </mat-form-field>
+            <mat-error *ngIf="primaryform.get('email').hasError('required')">
+                Este campo es <strong>obligatorio</strong> para continuar.
+            </mat-error>
+            <mat-error *ngIf="!primaryform.get('email').hasError('required') && primaryform.get('email').hasError('email') ">
+                Debe ingresar un mail <strong>valido</strong>.
+            </mat-error>
+      </div>
+  </form>
+  <div fxFlex="100%">
+      <div class="mb-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+          <div>
+              <button class="mat-raised-button"(click)="close()">Cerrar</button>
+            </div>
+          <div>
+              <button mat-button class="mat-raised-button mat-primary" (click)="save()" ><mat-icon>vpn_key</mat-icon> Restablecer</button>
+          </div>
+        </div>
+    </div>
+</div>

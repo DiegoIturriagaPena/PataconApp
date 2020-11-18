@@ -1,0 +1,160 @@
+.mat-login {
+    background: #961c38;
+}
+
+.mat-form-field-flex {
+    background-color: rgb(203, 142, 156);
+    color: white !important;
+    border-radius: 5px;
+}
+
+::ng-deep .login-container{
+    .mat-focused .mat-form-field-label {
+      color: white !important;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+      color: white;
+  }
+
+
+
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+      color: rgb(255, 255, 255);
+  }
+
+  .mat-form-field-outline {
+      background-color: rgb(255, 255, 255) !important;
+      border-radius: 5px;
+  }
+
+  .mat-form-field-ripple {
+      color: rgb(239, 229, 225);
+      background-color: rgb(203, 142, 156) !important;
+  }
+
+
+  .mat-focused .mat-form-field-label {
+    color: white !important;
+  }
+
+
+  .mat-form-field-underline {
+    background-color: white !important;
+  } 
+
+
+  .mat-form-field-ripple {
+  background-color: yellow !important;
+  }
+
+  .mat-form-field-empty.mat-form-field-label {
+    color: white;
+  }
+
+  .mat-focused .mat-form-field-empty.mat-form-field-label {
+    color: yellow !important;
+  }
+
+
+
+  .mat-form-field span.mat-form-field-label-wrapper label {
+    color:white !important;
+  }
+
+  .mat-form-field.mat-focused span.mat-form-field-label-wrapper label {
+    color:yellow !important;
+  }
+
+
+  .mat-input-element{
+    color: white !important;
+  }
+
+}
+
+.login-button {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin: auto;
+    background-color: rgb(204, 80, 98);
+    width: 100%;
+    height: 50px;
+    color: white
+}
+
+.login {
+    display: block;
+    padding-top: 30px;
+    padding-left: 35px;
+    padding-bottom: 35px;
+    padding-right: 35px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 450px;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.actions-login {
+    padding: 0%;
+    margin-top: 1rem;
+}
+
+/** Animation **/
+
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  position: absolute;
+}
+
+$particleSize: 20vmin;
+$animationDuration: 6s;
+$amount: 20;
+.background span {
+  width: $particleSize;
+  height: $particleSize;
+  border-radius: $particleSize;
+  backface-visibility: hidden;
+  position: absolute;
+  z-index:0;
+  animation-name: move;
+  animation-duration: $animationDuration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  $colors: (
+    #650318,
+    #E45A84,
+    #A9354E,
+    #832972
+  );
+  @for $i from 1 through $amount {
+    &:nth-child(#{$i}) {
+      color: nth($colors, random(length($colors)));
+      top: random(100) * 1%;
+      left: random(100) * 1%;
+      animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
+      animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
+      transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
+      $blurRadius: (random() + 0.5) * $particleSize * 0.5;
+      $x: if(random() > 0.5, -1, 1);
+      box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+    }
+  }
+}
+
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+::ng-deep .waiting-form{
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #ffffff;
+    }
+}

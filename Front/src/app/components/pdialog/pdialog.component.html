@@ -1,0 +1,40 @@
+<div class="pdialog">
+
+  <div 
+  fxLayout="column" 
+  fxLayoutAlign="space-between start"
+  fxLayoutGap="8px">
+    <div fxFlex="100%">
+      <h1 class="d-inline-flex" mat-dialog-title [innerHtml]="data.headerMessage"></h1>
+    </div>
+    <div fxFlex="100%">
+      <h3 [innerHtml]="data.bodyMessage"></h3>
+    </div>
+    <div class="w-100" fxLayout="row" fxLayoutAlign="end none"  fxLayoutGap="8px">
+      <div *ngIf="data.canSaveData === true" >
+        <button (click)="accept()" mat-raised-button color="primary" >Aceptar</button>
+      </div>
+      <div>
+        <button (click)="close()" mat-raised-button >{{data.canSaveData === true ? 'Cancelar' : 'Cerrar'}}</button>
+      </div>
+    </div>
+  </div>
+  <!--
+      <mat-icon class="d-inline-flex" color="warn">{{ data.icono }}</mat-icon>&nbsp;<h1 class="d-inline-flex" mat-dialog-title [innerHtml]="data.headerMessage"></h1>
+      <div  mat-dialog-content>
+          <div  class="container-fluid">
+            <h3 [innerHtml]="data.bodyMessage"></h3>
+          </div>
+        </div>
+        <mat-dialog-actions>
+          <div class="w-100" fxLayout="row" fxLayoutAlign="end none"  fxLayoutGap="8px">
+            <div *ngIf="data.canSaveData === true" >
+              <button (click)="accept()" mat-raised-button color="primary" >Aceptar</button>
+            </div>
+            <div>
+              <button (click)="close()" mat-raised-button >{{data.canSaveData === true ? 'Cancelar' : 'Cerrar'}}</button>
+            </div>
+          </div>
+        </mat-dialog-actions>
+        -->
+</div>

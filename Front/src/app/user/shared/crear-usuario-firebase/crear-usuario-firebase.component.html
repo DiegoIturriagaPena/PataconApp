@@ -1,0 +1,32 @@
+<div class="pata-form">
+
+  <div class="add-gps" style="padding: 5px">
+    <h2 mat-dialog-title>Crear Usuario Aplicación Móvil</h2>
+    <mat-dialog-content>
+      <form [formGroup]="addUserGroup">
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email" required>
+          <mat-label>Email</mat-label>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Contraseña" formControlName="pass" required>
+          <mat-label>Contraseña</mat-label>
+        </mat-form-field>
+
+
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions style="padding:5px;">
+      <div fxFlex></div>
+      <button class="add-button" mat-button (click)="insertarUsuarioFirebase()" [disabled]="!addUserGroup.valid">Crear
+        Usuario</button>
+      <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+        <div>
+          <button class="mat-raised-button" (click)="close()">Cerrar</button>
+        </div>
+      </div>
+    </mat-dialog-actions>
+
+  </div>
+</div>

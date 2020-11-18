@@ -1,0 +1,86 @@
+%super-form{
+    $form-black:#000000;
+    $form-purple:#6a1b9a;
+    $form-gris: #626262;
+    $form-red:#b71c1c;
+    .mat-focused .mat-form-field-label {
+        color: $form-black !important;
+    }
+  
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: $form-gris;
+    }
+  
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+        color: $form-black;
+    }
+  
+    .mat-form-field-outline {
+        background-color: $form-gris !important;
+        border-radius: 5px;
+    }
+  
+    .mat-form-field-ripple {
+        color: #ffffff;
+        background-color: #00ff80 !important;
+    }
+  
+  
+    .mat-focused .mat-form-field-label {
+      color: $form-black !important;
+    }
+  
+  
+    .mat-form-field-underline {
+      background-color: $form-gris !important;
+    } 
+
+    .mat-form-field-ripple {
+    background-color: $form-black !important;
+    }
+  
+    .mat-form-field-empty.mat-form-field-label {
+      color: $form-gris;
+    }
+    .mat-focused .mat-form-field-empty.mat-form-field-label {
+      color: $form-black !important;
+    }
+
+    .mat-form-field span.mat-form-field-label-wrapper label {
+      color:$form-gris !important;
+    }
+    .mat-form-field.mat-focused span.mat-form-field-label-wrapper label {
+      color:$form-black !important;
+    }
+
+    .mat-input-element{
+      color: $form-gris !important;
+    }
+
+    .mat-tab-label .mat-tab-label-content {
+      color: $form-black !important;
+  }
+
+    /**
+      Botonones
+    **/
+
+    button.add-button{
+      background-color: $form-red !important;
+      color: white !important;
+    }
+
+    button.add-button :hover{
+      mat-icon{
+      -webkit-animation:spin 2s linear infinite;
+      -moz-animation:spin 2s linear infinite;
+      animation:spin 2s linear infinite;
+      o-animation:spin 2s linear infinite;
+      }
+      @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+      @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+      @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+      @-o-keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+    }
+
+}

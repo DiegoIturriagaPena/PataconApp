@@ -1,0 +1,20 @@
+<div class="pata-form">
+
+    <div class="add-ruta" style="padding: 5px">
+
+        <div class="container-map">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" mapTypeId="roadmap" [minZoom]="minZoom" [maxZoom]="maxZoom" disableDoubleClickZoom="false">
+                <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints" [renderOptions]="renderOptions" (onChange)="change($event)" [visible]="visible">
+
+                </agm-direction>
+            </agm-map>
+
+            <app-form-agregar-ruta [origin]="origin" [destination]="destination" [waypoints]="waypoints">
+
+            </app-form-agregar-ruta>
+        </div>
+
+
+
+    </div>
+</div>

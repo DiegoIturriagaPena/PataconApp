@@ -1,0 +1,137 @@
+<div class="ini">
+
+  <mat-card class="mt-3">
+      <mat-card-header>
+          <mat-card-title>
+              <mat-icon>satellite</mat-icon> Modificar viña
+          </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="pata-form">
+
+<div class="w-100">
+    <div fxLayout="row" fxLayoutGap="10px">
+      <div fxFlex="100%">
+          <mat-card-content class="w-100" class="pata-form">
+        
+              <!--  Content   -->
+              <mat-vertical-stepper class="w-100" [linear]="true" #stepper>
+    
+                  <mat-step [stepControl]="primaryform">
+                    <form [formGroup]="primaryform">
+                        <ng-template matStepLabel>Información general</ng-template>
+  
+                      <div class="mb-2" fxLayout="column"  fxLayoutGap="10px">
+            
+                          <div fxFlex="100%">
+                              <mat-form-field class="mb-2">
+                                  <input matInput placeholder="Nombre" formControlName="nombre">
+                              </mat-form-field>
+                              <mat-error *ngIf="primaryform.get('nombre').hasError('required')">
+                                Este campo es <strong>obligatorio</strong>.
+                              </mat-error>
+                          </div>
+                          <div fxFlex="100%">
+                              <button mat-button class="mat-raised-button mat-primary" matStepperNext>Siguiente</button>
+                          </div>
+                
+                      </div>
+                    </form>
+                    </mat-step>
+  
+                    <mat-step [completed]="markers.length != 0">
+                        <ng-template matStepLabel>Ubicación</ng-template>
+  
+                        <div class="mt-2" fxLayout="column"  fxLayoutGap="10px">
+                            <agm-map
+                            [latitude]="currentLatitude"
+                            [longitude]="currentlLongitude"
+                            [zoom]="15"
+                            (mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
+                            >
+                          
+                            <agm-marker
+                              *ngFor="let marker of markers"
+                              [latitude]="marker.lat"
+                              [longitude]="marker.lng"
+                              [markerDraggable]="true"
+                              (markerClick)="selectMarker($event)"
+                            >
+                            </agm-marker>
+                            <!--<agm-rectangle
+                              [north]="max('lat')"
+                              [east]="max('lng')"
+                              [south]="min('lat')"
+                              [west]="min('lng')"
+                            >
+                            </agm-rectangle>-->
+                          </agm-map>
+                        </div>
+                        <div class="mt-3" fxLayout="column" fxLayoutGap="10px">
+                          <div fxFlex="100%">
+                              <button mat-button matStepperPrevious>Atras</button>
+                          </div>
+                          <div  *ngIf="markers.length != 0" fxFlex="100%">
+                              <button mat-button class="mat-raised-button mat-primary" matStepperNext>Siguiente</button>
+                          </div>
+                        </div>   
+                        <div *ngIf="markers.length != 0" class="mt-3" fxLayout="column"  fxLayoutGap="10px">
+                            <div>
+                                <button mat-button class="mat-raised-button mat-primary" (click)="eraseAll()"> <mat-icon>delete</mat-icon> Eliminar marcador</button>
+                            </div>
+                        </div>
+                    </mat-step>
+
+                    <mat-step>
+                      <ng-template matStepLabel>Selección de tipos de uva</ng-template>
+
+                      <div fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="100%">
+                            <form [formGroup]="typeGrapeFrom">
+                                <div *ngFor="let data of uvas">
+                                    <mat-checkbox [checked]="data.activo" (change)="onChange(data, $event)">{{data.tipo_uva}}</mat-checkbox>
+                                </div>
+                              </form>
+                        </div>
+                      </div>
+    
+                        <div class="mb-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                          <div>
+                              <button mat-button class="mat-raised-button" matStepperPrevious>Atras</button>
+                          </div>
+                          <div>
+                              <button mat-button class="mat-raised-button mat-primary" (click)="save()" >Guardar</button>
+                          </div>
+                        </div>
+    
+                       <!-- <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                            <div>
+                              <button mat-button class="mat-raised-button mat-warm" (click)="stepper.reset()">Restaurar</button>
+                            </div>
+                          </div>-->
+                    </mat-step>
+    
+                  
+    
+              </mat-vertical-stepper>
+          
+          
+            </mat-card-content>
+      </div>
+    </div>
+    <div class="mt-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="10px">
+        <div fxFlex="100%">
+            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                <div>
+                  <button (click)="backToProductor()" class="mat-raised-button">Volver al productor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+  </div>
+          
+      </mat-card-content>
+  </mat-card>
+</div>
+
+

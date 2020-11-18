@@ -1,0 +1,45 @@
+<div class="pata-form">
+
+    <div class="add-gps" style="padding: 5px">
+        <h2 mat-dialog-title>Ingrese Datos Gps</h2>
+        <mat-dialog-content>
+            <form [formGroup]="editGpsGroup">
+                <mat-form-field>
+                    <input matInput placeholder="Imei" formControlName="imei" pattern="[0-9]{15,17}" required maxlength="17">
+                    <mat-label>Imei</mat-label>
+                    <mat-error *ngIf="editGpsGroup.get('imei').hasError('required')">
+                        <p [ngStyle]="{'color':red}">Este campo es requerido.</p>
+                    </mat-error>
+                    <mat-error *ngIf="!editGpsGroup.get('imei').hasError('required')
+                          && editGpsGroup.get('imei').hasError('pattern')">
+                        <p [ngStyle]="{'color': red}">El formato de IMEI es de 15 a 17 dígitos.</p>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Modelo" formControlName="modelo" required maxlength="30">
+                    <mat-error *ngIf="editGpsGroup.get('modelo').hasError('required')">
+                        <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                    </mat-error>
+                    <mat-label>Modelo</mat-label>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Número del Chip" formControlName="numero_chip" required maxlength="9">
+                    <mat-label>Número del Chip</mat-label>
+                    <mat-error *ngIf="editGpsGroup.get('numero_chip').hasError('required')">
+                        <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                    </mat-error>
+                    <mat-error *ngIf="!editGpsGroup.get('numero_chip').hasError('required') 
+                  && editGpsGroup.get('numero_chip').hasError('pattern')">
+                        <p [ngStyle]="{'color': red}">Formato: 9NNNNNNNN</p>
+                    </mat-error>
+                </mat-form-field>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions style="padding:5px;">
+            <div fxFlex></div>
+            <button class="add-button" mat-button (click)="actualizarGps()" [disabled]="!editGpsGroup.valid">Guardar GPS</button>
+        </mat-dialog-actions>
+    </div>
+</div>

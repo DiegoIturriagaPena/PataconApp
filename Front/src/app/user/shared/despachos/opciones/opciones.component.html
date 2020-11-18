@@ -1,0 +1,28 @@
+
+<div class="dialog-form">
+  <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="10px">
+    <div fxFlex="100%">
+      <h2><mat-icon>loyalty</mat-icon> Opciones</h2>
+    </div>
+    <div class="w-100" fxFlex="100%">
+        <button class="mat-raised-button"> <mat-icon>remove_red_eye</mat-icon> Ver</button>
+    </div>
+    <div class="w-100" fxFlex="100%">
+        <button class="mat-raised-button"> <mat-icon>edit</mat-icon> Modificar</button>
+    </div>
+    <div class="w-100" fxFlex="100%">
+        <button class="mat-raised-button"> <mat-icon>delete</mat-icon> Eliminar</button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="mt-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="10px">
+      <div fxFlex="100%">
+          <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+              <div>
+                <button class="mat-raised-button"(click)="close()">Cerrar</button>
+              </div>
+              </div>
+      </div>
+  </div>
+      
+</div>

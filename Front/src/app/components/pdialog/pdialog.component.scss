@@ -1,0 +1,22 @@
+.custom-dialog-container .mat-dialog-container {
+    transform: none;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    background-color: #ffffff;
+}
+
+.mat-primary{
+    background-color: #b71c1c;
+    color: #ffffff;
+}
+
+.mat-secondary{
+   background-color: rgb(179, 179, 179);
+   color: black;
+}
+
+::ng-deep .pdialog{
+    padding: 15px;
+}

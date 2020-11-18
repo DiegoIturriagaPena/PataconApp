@@ -1,0 +1,182 @@
+<button class="fab-button-events" matTooltip="Eventos" [@showEvents]="state" mat-fab color="primary" (click)="onClickShowEvents()"><mat-icon>notifications</mat-icon></button>
+
+
+<mat-tab-group class="card-event" *ngIf="mostrarEventos" backgroundColor="primary">
+    <mat-tab label="Eventos">
+
+        <mat-card style="background:rgba(255, 255, 255, 0.842); color:black; width: 100%; margin: 0%; ">
+
+            <mat-divider style="background-color: rgba(128, 128,128, 0.15) "></mat-divider>
+            <mat-card-content class="scrollable " style="padding: 0%; margin-top: 2px; ">
+
+                <mat-card class="item-card-event" *ngFor="let event of listEventLlegando; let i= index" (click)="onClickEvent(event,event.patente,i); " [@destacarCard]="event.isSelected">
+                    <mat-card-title class="item-card-title-event ">
+                        <mat-basic-chip style="background-color: #5c5c5c; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">{{event.patente}}</mat-basic-chip>
+
+
+
+                        <mat-basic-chip *ngIf="event.tipo == 'Llegando'" style="background-color: #1621b8; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:50px; padding-bottom: 5px; padding-top: 5px; " [matMenuTriggerFor]="menu">{{event.tipo}}</mat-basic-chip>
+
+
+
+                        <!-- 
+
+
+                        <mat-basic-chip *ngIf="event.tipo == 'Cancelado'" style="background-color: #8805c5; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:50px; padding-bottom: 5px; padding-top: 5px; " [matMenuTriggerFor]="menu">{{event.tipo}}</mat-basic-chip>
+
+                        <mat-basic-chip *ngIf="event.tipo == 'Terminado'" style="background-color: #749ea5; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:50px; padding-bottom: 5px; padding-top: 5px; " [matMenuTriggerFor]="menu">{{event.tipo}}</mat-basic-chip>-->
+
+                        <mat-basic-chip style="float:right; padding-right: 12px; ">{{event.hora}}</mat-basic-chip>
+
+
+
+                    </mat-card-title>
+                    <mat-card-content class="item-card-content-event ">
+                        {{event.origen }} - {{event.destino}}
+                    </mat-card-content>
+
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,1)">Llegando</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,2)">Saliendo</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,3)">Desviado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,4)">Pendiente</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,5)">Cancelado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,6)">Terminado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,7)">En ruta</button>
+
+                    </mat-menu>
+
+
+
+                </mat-card>
+                <mat-card class="item-card-event" *ngFor="let event of listEventSaliendo; let i= index" (click)="onClickEvent(event,event.patente,i); " [@destacarCard]="event.isSelected">
+                    <mat-card-title class="item-card-title-event ">
+                        <mat-basic-chip style="background-color: #5c5c5c; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">{{event.patente}}</mat-basic-chip>
+
+                        <mat-basic-chip *ngIf="event.tipo == 'Saliendo'" style="background-color: #216d34; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:50px; padding-bottom: 5px; padding-top: 5px; " [matMenuTriggerFor]="menu">{{event.tipo}}</mat-basic-chip>
+
+                        <mat-basic-chip style="float:right; padding-right: 12px; ">{{event.hora}}</mat-basic-chip>
+
+
+                    </mat-card-title>
+                    <mat-card-content class="item-card-content-event ">
+                        {{event.origen }} - {{event.destino}}
+                    </mat-card-content>
+
+
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,1)">Llegando</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,2)">Saliendo</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,3)">Desviado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,4)">Pendiente</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,5)">Cancelado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,6)">Terminado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,7)">En ruta</button>
+
+                    </mat-menu>
+
+
+
+                </mat-card>
+
+                <mat-card class="item-card-event" *ngFor="let event of listEventEnRuta; let i= index" (click)="onClickEvent(event,event.patente,i); " [@destacarCard]="event.isSelected">
+
+                    <mat-card-title class="item-card-title-event ">
+                        <mat-basic-chip style="background-color: #5c5c5c; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">{{event.patente}}</mat-basic-chip>
+                        <mat-basic-chip *ngIf="event.tipo == 'En ruta'" style="background-color: #b85116; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:50px; padding-bottom: 5px; padding-top: 5px; " [matMenuTriggerFor]="menu">{{event.tipo}}</mat-basic-chip>
+                        <mat-basic-chip style="float:right; padding-right: 12px; ">{{event.hora}}</mat-basic-chip>
+                    </mat-card-title>
+                    <mat-card-content class="item-card-content-event ">
+                        {{event.origen }} - {{event.destino}}
+                    </mat-card-content>
+
+
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,1)">Llegando</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,2)">Saliendo</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,3)">Desviado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,4)">Pendiente</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,5)">Cancelado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,6)">Terminado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,7)">En ruta</button>
+
+                    </mat-menu>
+
+
+                </mat-card>
+                <mat-card class="item-card-event" *ngFor="let event of listEventDesviado; let i= index" (click)="onClickEvent(event,event.patente,i); " [@destacarCard]="event.isSelected">
+
+                    <mat-card-title class="item-card-title-event ">
+                        <mat-basic-chip style="background-color: #5c5c5c; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">{{event.patente}}</mat-basic-chip>
+                        <mat-basic-chip *ngIf="event.tipo == 'Desviado'" style="background-color: #9e1437; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:50px; padding-bottom: 5px; padding-top: 5px; " [matMenuTriggerFor]="menu">{{event.tipo}}</mat-basic-chip>
+                        <mat-basic-chip style="float:right; padding-right: 12px; ">{{event.hora}}</mat-basic-chip>
+                    </mat-card-title>
+                    <mat-card-content class="item-card-content-event ">
+                        {{event.origen }} - {{event.destino}}
+                    </mat-card-content>
+
+
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,1)">Llegando</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,2)">Saliendo</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,3)">Desviado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,4)">Pendiente</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,5)">Cancelado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,6)">Terminado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,7)">En ruta</button>
+
+                    </mat-menu>
+
+
+                </mat-card>
+                <mat-card class="item-card-event" *ngFor="let event of listEventPendiente; let i= index" (click)="onClickEvent(event,event.patente,i); " [@destacarCard]="event.isSelected">
+
+                    <mat-card-title class="item-card-title-event ">
+                        <mat-basic-chip style="background-color: #5c5c5c; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; ">{{event.patente}}</mat-basic-chip>
+                        <mat-basic-chip *ngIf="event.tipo == 'Pendiente'" style="background-color: #c6d403; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:50px; padding-bottom: 5px; padding-top: 5px; " [matMenuTriggerFor]="menu">{{event.tipo}}</mat-basic-chip>
+
+                        <mat-basic-chip style="float:right; padding-right: 12px; ">{{event.hora}}</mat-basic-chip>
+                    </mat-card-title>
+                    <mat-card-content class="item-card-content-event ">
+                        {{event.origen }} - {{event.destino}}
+                    </mat-card-content>
+
+
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,1)">Llegando</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,2)">Saliendo</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,3)">Desviado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,4)">Pendiente</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,5)">Cancelado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,6)">Terminado</button>
+                        <button mat-menu-item (click)="changeStateEvent(event.id_evento,7)">En ruta</button>
+
+                    </mat-menu>
+
+
+                </mat-card>
+
+            </mat-card-content>
+
+        </mat-card>
+
+
+
+    </mat-tab>
+    <mat-tab label="Filtros">
+
+        <mat-card style="background:rgba(255, 255, 255, 0.815); color:black; width: 100%; margin: 0%; ">
+
+            <mat-divider style="background-color: rgba(128, 128,128, 0.15) "></mat-divider>
+            <mat-card-content class="scrollable " style="padding: 0%; margin-top: 2px; ">
+
+
+                <app-filter></app-filter>
+
+
+
+            </mat-card-content>
+
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

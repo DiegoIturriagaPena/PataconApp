@@ -1,0 +1,25 @@
+<div class="pata-form">
+
+    <div class="add-ruta" style="padding: 5px">
+        <h2 mat-dialog-title>Editar ruta</h2>
+
+        <div class="container-map">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" mapTypeId="roadmap" [minZoom]="minZoom" [maxZoom]="maxZoom" disableDoubleClickZoom="false">
+                <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints" [renderOptions]="renderOptions" [visible]="visible" (onChange)="change($event)">
+
+                </agm-direction>
+            </agm-map>
+        </div>
+
+
+
+
+    </div>
+
+    <mat-dialog-actions style=" padding:5px; ">
+        <div fxFlex></div>
+        <button class="add-button " mat-button (click)="habilitarEdicion() ">{{ buttonHabilitar}}</button>
+        <button class="add-button " mat-button (click)="saveEdicion() ">Guardar</button>
+    </mat-dialog-actions>
+
+</div>

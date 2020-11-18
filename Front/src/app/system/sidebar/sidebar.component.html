@@ -1,0 +1,27 @@
+<div class="user-profile" style="background: url(assets/Images/background/small.jpg) no-repeat;">
+  <!-- User profile image -->
+
+  <div class="profile-img"> <img src="../../../assets/Images/profile/userProfile.png" alt="user"> </div>
+
+  <div class="profile-text">
+    <a [matMenuTriggerFor]="sdprofile" class=""> Hola <strong>{{ userName }}!</strong> <i class="ti-angle-down font-12 m-l-5"></i></a>
+  </div>
+</div>
+<div>
+
+
+  <mat-menu #sdprofile="matMenu" class="mymegamenu">
+      <button (click)="modificarCuenta()" mat-menu-item>
+          <mat-icon>account_box</mat-icon>
+          Perfil
+      </button>
+      <button mat-menu-item (click)="logout()" >
+          <mat-icon>exit_to_app</mat-icon>
+          Cerrar Sesión
+      </button>
+  </mat-menu>
+  <mat-nav-list>
+    <app-menu-item *ngFor="let item of navItems" [item]="item"></app-menu-item>
+  </mat-nav-list>
+
+</div>

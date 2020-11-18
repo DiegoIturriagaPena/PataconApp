@@ -1,0 +1,30 @@
+<div class="container-map" (infoWindowOpen)="showInfoWindow($event)">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" mapTypeId="roadmap" [minZoom]="minZoom" [maxZoom]="maxZoom">
+        <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints" [visible]="isOpen">
+        </agm-direction>
+        <!--<agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true" (markerClick)="selectMarker($event)">
+        </agm-marker>
+    -->
+        <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="iconUrl" [markerClickable]="markerClickable">
+            <agm-info-window [isOpen]="isOpen">
+                <div class='agm-info-window-content'>
+                    <div style="width: 100%">
+                        <div class="container-dialog-marker">
+                            <mat-basic-chip style="background-color: #b71c1c; color:white; border-radius: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px; margin-top: 20px; font-size: 14px;">{{patente}}</mat-basic-chip>
+                        </div>
+                        <mat-list style="color: black; padding: 0px; margin: 0px; font-size: 12px;">
+                            <mat-list-item style="color: black; padding: 0px; margin: 0px;">
+                                {{nombre}}
+                            </mat-list-item>
+                            <mat-list-item style="color: black; padding: 0px; margin:0px; ">
+                                {{telefono}}
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </div>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
+    <app-events (dataRuta)="obtenerRuta($event)" [listEvents]="dataEventos"></app-events>
+
+</div>

@@ -1,0 +1,10 @@
+<div style="background: white">
+  <mat-tab-group #tabGroup class="pata-form" (selectedTabChange)="onTabChanged($event)">
+    <mat-tab label="Camiones">
+      <app-lista-camiones></app-lista-camiones>
+    </mat-tab>
+    <mat-tab label="GPS">
+      <app-lista-gps></app-lista-gps>
+    </mat-tab>
+  </mat-tab-group>
+</div>

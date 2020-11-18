@@ -1,0 +1,11 @@
+.save-button {
+    background-color: rgb(204, 80, 98);
+    color: white;
+    right: 0;
+}
+
+@import "../../../../../assets/styles/patacon/forms";
+@import "../../../../../assets/styles/patacon/pata";
+::ng-deep .pata-form {
+  @extend %super-form;
+}

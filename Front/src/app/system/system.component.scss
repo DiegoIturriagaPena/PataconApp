@@ -1,0 +1,24 @@
+@import '../../assets/styles/variable.scss';
+@import '../../assets/styles/spinner';
+@import '../../assets/styles/app';
+@import '../../assets/styles/header';
+@import '../../assets/styles/pages';
+@import '../../assets/styles/sidebar';
+@import '../../assets/styles/responsive';
+.mat-toolbar.topbar[_ngcontent-c1] {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: min-content;
+}
+
+.page-wrapper {
+    padding: 0%;
+    margin: 0%;
+}
+
+.page-content {
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+}

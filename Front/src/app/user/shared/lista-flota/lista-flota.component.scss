@@ -1,0 +1,93 @@
+@import "../../../../assets/styles/variable.scss";
+@import "../../../../assets/styles/spinner";
+@import "../../../../assets/styles/app";
+@import "../../../../assets/styles/header";
+@import "../../../../assets/styles/pages";
+@import "../../../../assets/styles/sidebar";
+@import "../../../../assets/styles/responsive";
+
+
+
+.add-button {
+  background-color: rgb(204, 80, 98);
+  color: white;
+  right: 0;
+}
+
+.mat-row:hover{
+  cursor: pointer;
+}
+::ng-deep .mat-form-field-label {
+  color: rgba(0, 0, 0, 0.12) !important;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  color: rgba(0, 0, 0, 0.12) !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+div.flota {
+  animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  /* Firefox */
+  -webkit-animation: fadein 2s;
+  /* Safari and Chrome */
+  -o-animation: fadein 2s;
+  /* Opera */
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  /* Firefox */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadein {
+  /* Opera */
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@import '../../../../assets/styles/patacon/forms';
+@import '../../../../assets/styles/patacon/pata';
+::ng-deep .pata-form{
+  @extend %super-form;
+}
+
+::ng-deep .pata-table{
+  @extend %super-table;
+}
+
+::ng-deep .notdata-block{
+  @extend %not-data-block;
+}

@@ -1,0 +1,6 @@
+https://github.com/EinherjarSt/gps-tracking-nodejs
+
+indexgps (llama al objeto de la libreria de arriba) -> adapter-tk103 -> parser.
+
+CAmbia la ip y puerto
+adminip123456 <ip> <port>

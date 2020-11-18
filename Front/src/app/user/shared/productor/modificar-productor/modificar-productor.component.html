@@ -1,0 +1,204 @@
+<div class="dialog-form">
+  <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="10px">
+    <div fxFlex="100%">
+      <h2><mat-icon>supervised_user_circle</mat-icon> Editar productor</h2>
+    </div>
+
+    <div fxFlex="100%">
+      <mat-card-content class="card-content">
+    
+        <!--  Content   -->
+        <mat-horizontal-stepper [linear]="true" #stepper>
+
+          <mat-step [stepControl]="primaryform">
+            <form [formGroup]="primaryform">
+              <ng-template matStepLabel>Información general</ng-template>
+
+              <div fxLayout="column" fxLayoutGap="8px">
+                
+                <div fxFlex="100%">
+                  <mat-form-field class="mb-2">
+                    <input matInput placeholder="RUT" formControlName="rut" 
+                    pattern="[0-9]{1,2}[0-9]{3}[0-9]{3}(-)([0-9]|(k|K))" required>
+                    <mat-error *ngIf="primaryform.get('rut').hasError('required')">
+                        Este campo es <strong>obligatorio</strong> para continuar.
+                    </mat-error>
+                    <mat-error *ngIf="!primaryform.get('rut').hasError('required') 
+                                && primaryform.get('rut').hasError('pattern')">
+                      El formato <strong>no corresponde</strong> a un Rut.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              
+                <div fxFlex="100%">
+                  <mat-form-field class="mb-2">
+                    <input matInput placeholder="Razón Social" formControlName="razon_social">
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="100%">
+                  <mat-form-field class="mb-2">
+                    <input matInput placeholder="Dirección" formControlName="direccion">
+                  </mat-form-field>
+                </div>
+              </div>                   
+
+              <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                <div>
+                  <button mat-button class="mat-raised-button mat-primary" matStepperNext [disabled]="!primaryform.valid">Siguiente</button>
+                </div>
+              </div>
+      
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="secondaryform">
+            <form [formGroup]="secondaryform">
+              <ng-template matStepLabel>Información de contacto</ng-template>
+              
+              <mat-form-field class="mb-2">
+                <input matInput placeholder="Nombre" formControlName="nombre" required>
+                <mat-error *ngIf="secondaryform.get('nombre').hasError('required')">
+                    Este campo es <strong>obligatorio</strong> para continuar.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mb-2">
+                <input matInput placeholder="Apellidos" formControlName="apellidos" required>
+                <mat-error *ngIf="secondaryform.get('apellidos').hasError('required')">
+                    Este campo es <strong>obligatorio</strong> para continuar.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mb-2">
+                <input matInput placeholder="Teléfono" formControlName="telefono" pattern="(9)[0-9]{8}" required>
+                <mat-error *ngIf="secondaryform.get('telefono').hasError('required') ">
+                    Este campo es <strong>obligatorio</strong> para continuar.
+                </mat-error>
+                <mat-error *ngIf="!secondaryform.get('telefono').hasError('required')
+                            && secondaryform.get('telefono').hasError('pattern')">
+                    Formato: 9NNNNNNNN
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mb-2">
+                <input matInput placeholder="Opcional: otro teléfono" formControlName="telefono2" pattern="(9)[0-9]{8}">
+                <mat-error *ngIf="secondaryform.get('telefono2').hasError('pattern')">
+                    Formato: 9NNNNNNNN
+                </mat-error>
+              </mat-form-field>
+
+              <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                <div>
+                  <button mat-button class="mat-raised-button mat-primary" matStepperNext [disabled]="!secondaryform.valid">Siguiente</button>
+                </div>
+              </div>
+    
+            </form>
+          </mat-step>
+
+          <mat-step>
+            <ng-template matStepLabel>Resumen</ng-template>
+
+            <div fxLayout="column" fxLayoutGap="8px">
+
+              <div fxLayout="row" fxLayoutGap="8px">
+                <div fxFlex="50">
+                  <span>Rut: </span>
+                </div>
+
+                <div fxFlex="50">
+                  <span>{{primaryform.get('rut').value}}</span>
+                </div>
+              </div>
+                      
+              <div *ngIf="primaryform.get('razon_social').value != ''" fxLayout="row" fxLayoutGap="8px">
+                <div fxFlex="50">
+                  <span>Razón social: </span>
+                </div>
+                <div fxFlex="50">
+                  <span>{{primaryform.get('razon_social').value}}</span>
+                </div>
+              </div>
+
+              <div *ngIf="primaryform.get('direccion').value != ''" fxLayout="row" fxLayoutGap="8px">
+                <div fxFlex="50">
+                  <span>Dirección: </span>
+                </div>
+                <div fxFlex="50">
+                  <span>{{primaryform.get('direccion').value}}</span>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="8px">
+                <div fxFlex="50">
+                  <span>Nombre: </span>
+                </div>
+                <div fxFlex="50">
+                  <span>{{secondaryform.get('nombre').value}}</span>
+                </div>
+              </div>
+
+
+              <div fxLayout="row" fxLayoutGap="8px">
+                <div fxFlex="50">
+                  <span>Apellidos: </span>
+                </div>
+                <div fxFlex="50">
+                  <span>{{secondaryform.get('apellidos').value}}</span>
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="8px">
+                <div fxFlex="50">
+                  <span>Teléfono: </span>
+                </div>
+                <div fxFlex="50">
+                  <span>{{secondaryform.get('telefono').value}}</span>
+                </div>
+              </div>
+
+              <div *ngIf="secondaryform.get('telefono2').value != ''" fxLayout="row" fxLayoutGap="8px">
+                <div fxFlex="50">
+                  <span>Segundo teléfono (Opcional): </span>
+                </div>
+                <div fxFlex="50">
+                  <span>{{secondaryform.get('telefono2').value}}</span>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="mb-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+              <div>
+                <button mat-button class="mat-raised-button" matStepperPrevious>Regresar</button>
+              </div>
+              <div>
+                <button mat-button class="mat-raised-button mat-primary" (click)="save()" >Guardar</button>
+              </div>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+              <div>
+                <button mat-button class="mat-raised-button mat-warm" (click)="stepper.reset()">Restaurar</button>
+              </div>
+            </div>-->
+          </mat-step>
+
+        </mat-horizontal-stepper>
+      </mat-card-content>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="mt-2" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="10px">
+    <div fxFlex="100%">
+      <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+        <div>
+          <button class="mat-raised-button"(click)="close()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+</div>

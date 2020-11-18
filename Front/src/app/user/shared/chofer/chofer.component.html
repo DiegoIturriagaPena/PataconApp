@@ -1,0 +1,70 @@
+<div class="pata-form">
+
+
+    <div class="add-chofer" style="padding: 5px">
+        <h2 mat-dialog-title>Ingrese Datos Chofer</h2>
+        <mat-dialog-content>
+            <form [formGroup]="addChoferGroup">
+
+                <mat-form-field>
+                    <mat-label>Rut</mat-label>
+                    <input matInput placeholder="Rut" formControlName="rut" pattern="[0-9]{1,2}[0-9]{3}[0-9]{3}(-)([0-9]|(k|K))" required maxlength="12">
+                    <mat-error *ngIf="addChoferGroup.get('rut').hasError('required')">
+                        <p [ngStyle]="{'color':red}">Este campo es requerido.</p>
+                    </mat-error>
+                    <mat-error *ngIf="!addChoferGroup.get('rut').hasError('required')
+                      && addChoferGroup.get('rut').hasError('pattern')">
+                        <p [ngStyle]="{'color':red}">El formato no corresponde a un Rut.</p>
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="w-100">
+                    <mat-form-field>
+                        <mat-label>Nombre del Chofer</mat-label>
+                        <input matInput placeholder="Nombre del Chofer" formControlName="nombre_chofer" required maxlength="60">
+                        <mat-error *ngIf="addChoferGroup.get('nombre_chofer').hasError('required')">
+                            <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                    <mat-form-field>
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input matInput placeholder="Apellido Paterno" formControlName="apellido_paterno" required maxlength="60">
+                        <mat-error *ngIf="addChoferGroup.get('apellido_paterno').hasError('required')">
+                            <p [ngStyle]="{'color':red}">Este campo es requerido.</p>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="w-100">
+                    <mat-form-field class="w-100">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input class="input-color" matInput placeholder="Apellido Materno" formControlName="apellido_materno" maxlength="60">
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field class="w-100">
+                        <mat-label>Número Teléfono</mat-label>
+                        <input class="input-color" matInput placeholder="Número télefono" formControlName="num_telefono" pattern="(9)[0-9]{8}" required maxlength="9">
+                        <mat-error *ngIf="addChoferGroup.get('num_telefono').hasError('required')">
+                            <p [ngStyle]="{'color': red}">Este campo es requerido.</p>
+                        </mat-error>
+                        <mat-error *ngIf="!addChoferGroup.get('num_telefono').hasError('required') 
+                  && addChoferGroup.get('num_telefono').hasError('pattern')">
+                            <p [ngStyle]="{'color': red}">Formato: 9NNNNNNNN</p>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions style="padding:5px;">
+            <div fxFlex></div>
+            <button class="save-button" mat-button (click)="insertarChofer()" [disabled]="!addChoferGroup.valid">Guardar Chofer</button>
+
+        </mat-dialog-actions>
+    </div>
+</div>

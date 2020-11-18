@@ -1,0 +1,12 @@
+@import '../../../../../assets/styles/variable.scss';
+@import '../../../../../assets/styles/spinner';
+@import '../../../../../assets/styles/app';
+@import '../../../../../assets/styles/header';
+@import '../../../../../assets/styles/pages';
+@import '../../../../../assets/styles/sidebar';
+@import '../../../../../assets/styles/responsive';
+@import '../../../../../assets/styles/_theme';
+
+agm-map {
+    height: 300px;
+}

@@ -1,0 +1,502 @@
+<div class="dialog-form pata-form">
+    <h2 mat-dialog-title> <mat-icon>local_shipping</mat-icon> Nuevo despacho</h2>
+
+    <mat-dialog-content>
+
+        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+            <!--<mat-step [stepControl]="primaryForm">
+                <form [formGroup]="primaryForm">
+                <ng-template matStepLabel>Chofer y camión</ng-template>
+
+                <div class="w-100 pata-form">
+                        <mat-form-field>
+                            <input matInput placeholder="Indicar carga a transportar (KG)" (change)="actualizarCamiones()" formControlName="carga">
+                            <mat-label>Carga</mat-label>
+                            <span matSuffix><strong>KG</strong></span>
+                            <mat-error *ngIf="primaryForm.get('carga').hasError('required')">
+                                Este campo es <strong>requerido</strong>.
+                            </mat-error>
+                            <mat-error *ngIf="primaryForm.get('carga').hasError('min')" >
+                                Este campo debe ser <strong>Mayor a 0</strong>.
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Selecciona Camión</mat-label>
+                            <mat-select  formControlName="camion" required>
+                                <mat-option class="selected-item" *ngFor="let camion of camiones" [value]="camion.patente">
+                                    {{camion.patente}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="!isCamionPrimaryForm">
+                                    Debe seleccionar un camion.
+                                </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="w-100">
+                        <mat-form-field>
+                            <mat-label>Selecciona Chofer</mat-label>
+                            <mat-select formControlName="chofer"  name="ref_chofer" required>
+                                <mat-option class="selected-item" *ngFor="let chofer of choferes" [value]="chofer">
+                                    {{chofer.nombre}} {{chofer.apellido_paterno}} {{chofer.apellido_materno}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="!isChoferPrimaryForm">
+                                Debe seleccionar un chofer.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                        <div ><button class="mat-raised-button" (click)="close()">Cerrar</button></div>
+                        <div ><button class="add-button" (click)="nextToSecondSteep(stepper)" mat-button>Siguiente</button></div>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="secondForm">
+                <ng-template matStepLabel>Selección de Ruta</ng-template>
+                <form [formGroup]="secondForm">
+                        <div class="w-100 pata-form">
+                                <mat-form-field>
+                                    <mat-label>Selecciona Productor</mat-label>
+                                    <mat-select formControlName="productor" name="busqueda" (selectionChange)="cambiarRutas(busquedaSeleccionada)" required> <!--[(value)]="busquedaSeleccionada"
+                                    <mat-select formControlName="productor" name="busqueda" (selectionChange)="cambiarRutas(busquedaSeleccionada)" required> 
+                                        <mat-option class="selected-item" *ngFor="let ruta of listaProductores" [value]="ruta">
+                                            {{ruta.Nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="!isProductorSecondForm">
+                                            Debe seleccionar un <strong>productor</strong>.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Selecciona Ruta</mat-label>
+                                    <mat-select formControlName="vina" [disabled]="disabledSecondary" name="ref_ruta" required>
+                                        <mat-option class="selected-item" *ngFor="let ruta of rutas2" [value]="ruta">
+                                             {{ruta.nombre_vina}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="!isVinaSecondForm">
+                                            Debe seleccionar una <strong>viña</strong>.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <div class="mb-2">
+                                    <div fxFlex></div>
+                                    <button class="add-button" mat-button matStepperPrevious>Anterior</button>
+                                    <div class="divider"></div>
+                                    <button class="add-button" mat-button (click)="nextToThridSteep(stepper)">Siguiente</button>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                                <div>
+                                    <button class="mat-raised-button" (click)="close()">Cerrar</button>
+                                </div>
+                            </div>
+
+                </form>
+            </mat-step>
+
+            <mat-step [stepControl]="thridForm">
+                <ng-template matStepLabel>Recorrido</ng-template>
+                <form [formGroup]="thridForm">
+
+
+                        <div class="w-100 pata-form">
+
+                                <mat-form-field>
+                                    <mat-label>Tipo Carga</mat-label>
+                                    <mat-select formControlName="tipo_carga" name="tipo_carga" required> 
+                                        <mat-option class="selected-item" *ngFor="let tipo of listTipos" [value]="tipo.value">
+                                            {{tipo.value}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="w-100 pata-form">
+
+                                <mat-form-field>
+                                    <mat-label>Tipo Envase</mat-label>
+                                    <mat-select [(ngModel)]="envase" name="envase" required>
+                                        <mat-option class="selected-item" *ngFor="let envase of listEnvase" [value]="envase.value">
+                                            {{envase.value}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="8px">
+                                <mat-form-field>
+                                    <mat-label>Fecha Inicio</mat-label>
+                                    <input matInput [matDatepicker]="picker1" placeholder="Fecha Inicio" formControlName="fecha_inicio"  disabled required> 
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                                   
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Hora Inicio</mat-label>
+                                    <input matInput type="time" placeholder="Hora Inicio"  formControlName="hora_inicio" name="hora_inicio"> 
+                                    <mat-error *ngIf="thridForm.get('hora_inicio').hasError('required')">
+                                            Ingrese una hora valida.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="8px">
+                                <mat-form-field>
+                                    <mat-label>Fecha de término</mat-label>
+                                    <input matInput [matDatepicker]="picker2" placeholder="Fecha Termino"  formControlName="fecha_termino" disabled required> 
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                                  
+                                </mat-form-field>
+            
+                                <mat-form-field>
+                                    <mat-label>Hora de término</mat-label>
+                                    <input matInput type="time" placeholder="Hora Termino" formControlName="hora_termino" name="hora_termino"> 
+                                    <mat-error *ngIf="thridForm.get('hora_termino').hasError('required')">
+                                            Ingrese una hora valida.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="8px">
+                                    <mat-error *ngIf="!isValidThridForm">
+                                            Debe completar todos los datos
+                                    </mat-error>
+                                </div>
+                            <div class="mb-2">
+                                <div fxFlex></div>
+                                <button class="add-button" mat-button matStepperPrevious>Anterior</button>
+                                <div class="divider"></div>
+                                <button class="add-button" mat-button (click)="nextToFourthSteep(stepper)">Siguiente</button>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                                <div>
+                                    <button class="mat-raised-button" (click)="close()">Cerrar</button>
+                                </div>
+                            </div>
+                </form>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Resumen</ng-template>
+
+                <div fxLayout="column pata-form" fxLayoutGap="8px">
+
+                    <div *ngIf="tipo_carga !== ''" fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="50">
+                            <span>Tipo Carga: </span>
+                        </div>
+                        <div fxFlex="50">
+                            <span>{{ tipo_carga }}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="envase !== ''" fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="50">
+                            <span>Tipo Envase: </span>
+                        </div>
+                        <div fxFlex="50">
+                            <span>{{ envase }}</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="fecha_inicio !== ''" fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="50">
+                            <span>Fecha Inicio: </span>
+                        </div>
+                        <div fxFlex="50">
+                            <span>{{ fecha_inicio | date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="fecha_termino !== ''" fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="50">
+                            <span>Fecha Termino: </span>
+                        </div>
+                        <div fxFlex="50">
+                            <span>{{ fecha_termino | date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="ref_chofer !== ''" fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="50">
+                            <span>Chofer: </span>
+                        </div>
+                        <div fxFlex="50">
+                            <span> {{ref_chofer.nombre}} {{ref_chofer.apellido_paterno}} {{ref_chofer.apellido_materno}}</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="ref_camion !== ''" fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="50">
+                            <span>Camion: </span>
+                        </div>
+                        <div fxFlex="50">
+                            <span>{{ ref_camion }}</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="ref_ruta !== -1" fxLayout="row" fxLayoutGap="8px">
+                        <div fxFlex="50">
+                            <span>Ruta: </span>
+                        </div>
+                        <div fxFlex="50">
+                            <span>{{ ref_ruta.id }} - {{ref_ruta.nombre_vina}}</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-2 pata-form" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                    <div>
+                        <button mat-button class="add-button" matStepperPrevious>Regresar</button>
+                    </div>
+                    <div>
+                        <button class="add-button" mat-button (click)="guardar()">Guardar</button>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                    <div>
+                        <button class="mat-raised-button" (click)="close()">Cerrar</button>
+                    </div>
+                </div>
+
+            </mat-step>-->
+
+
+            <mat-step [stepControl]="primaryForm">
+                    <form [formGroup]="primaryForm" >
+                    <ng-template matStepLabel>Dia y Hora</ng-template>
+    
+                    <div class="w-100 pata-form mb-2">
+                            <div class="mb-1" fxLayout="row" fxLayoutGap="8px">
+                                    <mat-form-field>
+                                        <mat-label>Fecha Inicio</mat-label>
+                                        <input matInput (click)="picker1.open()" [matDatepicker]="picker1" placeholder="Fecha Inicio" formControlName="fecha_inicio"   > 
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                                        <mat-error *ngIf="primaryForm.get('fecha_inicio').hasError('required')">
+                                                Ingrese una fecha valida.
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Hora Inicio</mat-label>
+                                        <input matInput type="time" placeholder="Hora Inicio"  formControlName="hora_inicio" name="hora_inicio"> 
+                                        <mat-error *ngIf="primaryForm.get('hora_inicio').hasError('required')">
+                                                Ingrese una hora valida.
+                                        </mat-error>
+                                    </mat-form-field>
+                            </div>
+                            <div class="mb-1" fxLayout="row" fxLayoutGap="8px">
+                                <mat-form-field>
+                                    <mat-label>Fecha de término</mat-label>
+                                    <input matInput [matDatepicker]="picker2"  (click)="picker2.open()" placeholder="Fecha Termino"  formControlName="fecha_termino"  > 
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                                    <mat-error *ngIf="primaryForm.get('fecha_termino').hasError('required')">
+                                            Ingrese una fecha valida.
+                                    </mat-error>
+                                </mat-form-field>
+            
+                                <mat-form-field>
+                                    <mat-label>Hora de término</mat-label>
+                                    <input matInput type="time" placeholder="Hora Termino" formControlName="hora_termino" name="hora_termino"> 
+                                    <mat-error *ngIf="primaryForm.get('hora_termino').hasError('required')">
+                                            Ingrese una hora valida.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>  
+                    </div>
+                    <div class="w-100 pata-form mb-2">
+
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                        <div ><button class="add-button" (click)="nextToSecondSteep(stepper)" mat-button>Siguiente</button></div>
+                    </div>
+                    </form>
+                </mat-step>
+
+                <mat-step [stepControl]="secondForm">
+                        <form [formGroup]="secondForm">
+                        <ng-template matStepLabel>Carga</ng-template>
+        
+                        <div class="w-100 pata-form">
+                                <mat-form-field>
+                                    <input matInput formControlName="carga" placeholder="Indicar carga a transportar (KG)" (change)="actualizarCamiones()" >
+                                    <mat-label>Carga</mat-label>
+                                    <span matSuffix><strong>KG</strong></span>
+                                    <mat-error *ngIf="secondForm.get('carga').hasError('required')">
+                                        Este campo es <strong>requerido</strong>.
+                                    </mat-error>
+                                    <mat-error *ngIf="secondForm.get('carga').hasError('min')" >
+                                        Este campo debe ser <strong>Mayor a 0</strong>.
+                                    </mat-error>
+                                </mat-form-field>
+                                
+                                <mat-form-field>
+                                    <mat-label>Tipo Envase</mat-label>
+                                    <mat-select formControlName="envase" name="envase" >
+                                        <mat-option class="selected-item" *ngFor="let envase of listEnvase" [value]="envase.value">
+                                            {{envase.value}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="secondForm.get('envase').hasError('required')" >
+                                            Debe seleccionar <strong>una opción</strong>.
+                                    </mat-error>
+                                </mat-form-field>
+
+
+                            <mat-form-field>
+                                    <mat-label>Selecciona Camión</mat-label>
+                                    <mat-select  formControlName="camion" required>
+                                        <mat-option class="selected-item" *ngFor="let camion of camiones" [value]="camion.patente">
+                                            {{camion.patente}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="secondForm.get('camion').hasError('required')">
+                                            Debe seleccionar un camion.
+                                        </mat-error>
+                            </mat-form-field>
+                            
+                            <mat-form-field>
+                                    <mat-label>Selecciona Chofer</mat-label>
+                                    <mat-select formControlName="chofer"  name="ref_chofer" >
+                                        <mat-option class="selected-item" *ngFor="let chofer of choferes" [value]="chofer">
+                                            {{chofer.nombre}} {{chofer.apellido_paterno}} {{chofer.apellido_materno}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="secondForm.get('chofer').hasError('required')">
+                                        Debe seleccionar un chofer.
+                                    </mat-error>
+                            </mat-form-field>
+
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                                <div><button class="add-button" mat-button matStepperPrevious>Anterior</button></div>
+                                <div ><button class="add-button" (click)="nextToThridSteep(stepper)" mat-button>Siguiente</button></div>
+                            </div>
+                        </form>
+                </mat-step>
+                <mat-step [stepControl]="thridForm">
+                    <ng-template matStepLabel>Selección de ruta</ng-template>
+
+                    <form [formGroup]="thridForm">
+                        <div class="w-100 pata-form">
+                            <mat-form-field>
+                                <mat-label>Selecciona Productor</mat-label>
+                                <mat-select formControlName="productor" name="busqueda" (selectionChange)="cambiarRutas()"> 
+                                    <mat-option class="selected-item" *ngFor="let ruta of listaProductores" [value]="ruta">
+                                        {{ruta.Nombre}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="thridForm.get('productor').hasError('required')">
+                                        Debe seleccionar un <strong>productor</strong>.
+                                </mat-error>
+                            </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Selecciona Ruta</mat-label>
+                                    <mat-select formControlName="vina" [disabled]="disabledSecondary" name="ref_ruta">
+                                        <mat-option class="selected-item" *ngFor="let ruta of rutas2" [value]="ruta">
+                                                {{ruta.nombre_vina}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="thridForm.get('vina').hasError('required')">
+                                            Debe seleccionar una <strong>viña</strong>.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <div class="mb-2">
+                                    <div fxFlex></div>
+                                    <button class="add-button" mat-button matStepperPrevious>Anterior</button>
+                                    <div class="divider"></div>
+                                    <button class="add-button" mat-button (click)="nextToFourthSteep(stepper)">Siguiente</button>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                                <div>
+                                    <button class="mat-raised-button" (click)="close()">Cerrar</button>
+                                </div>
+                            </div>
+
+                    </form>
+                </mat-step>
+
+                <mat-step>
+                    <ng-template matStepLabel>Resumen</ng-template>
+        
+                        <div fxLayout="column pata-form">
+        
+                        <div *ngIf="tipo_carga !== ''" fxLayout="row" fxLayoutGap="4px">
+                            <div fxFlex="50">
+                                <span>Tipo Carga: </span>
+                            </div>
+                            <div fxFlex="50">
+                                <span>{{ tipo_carga }} KG</span>
+                            </div>
+                        </div>
+                        <div *ngIf="envase !== ''" fxLayout="row" fxLayoutGap="4px">
+                            <div fxFlex="50">
+                                <span>Tipo Envase: </span>
+                            </div>
+                            <div fxFlex="50">
+                                <span>{{ envase }}</span>
+                            </div>
+                        </div>
+                        <div *ngIf="fecha_inicio !== ''" fxLayout="row" fxLayoutGap="4px">
+                            <div fxFlex="50">
+                                <span>Fecha Inicio: </span>
+                            </div>
+                            <div fxFlex="50">
+                                <span>{{ fecha_inicio | date: 'dd/MM/yyyy'}}</span>
+                            </div>
+                        </div>
+                        <div *ngIf="fecha_termino !== ''" fxLayout="row" fxLayoutGap="4px">
+                            <div fxFlex="50">
+                                <span>Fecha Termino: </span>
+                            </div>
+                            <div fxFlex="50">
+                                <span>{{ fecha_termino | date: 'dd/MM/yyyy'}}</span>
+                            </div>
+                        </div>
+        
+                        <div *ngIf="ref_chofer !== '' && ref_camion !== ''" fxLayout="row" fxLayoutGap="4px">
+                            <div fxFlex="50">
+                                <span><mat-icon> person </mat-icon> {{ref_chofer.nombre}} {{ref_chofer.apellido_paterno}}</span>
+                            </div>
+                            <div fxFlex="50">
+                                <span> <mat-icon>local_shipping</mat-icon> {{ref_camion}}</span>
+                            </div>
+                        </div>
+        
+        
+                        <div *ngIf="ref_ruta !== -1" fxLayout="row" fxLayoutGap="4px">
+                            <div fxFlex="50">
+                                <span>Ruta: </span>
+                            </div>
+                            <div fxFlex="50">
+                                <span>{{ ref_ruta.id }} - {{ref_ruta.nombre_vina}}</span>
+                            </div>
+                        </div>
+        
+                        </div>
+        
+                        <div class="mb-2 pata-form" fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                            <div>
+                                <button mat-button class="add-button" matStepperPrevious>Regresar</button>
+                            </div>
+                            <div>
+                                <button class="add-button" mat-button (click)="guardar()">Guardar</button>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="end none" fxLayoutGap="8px">
+                            <div>
+                                <button class="mat-raised-button" (click)="close()">Cerrar</button>
+                            </div>
+                        </div>
+        
+                </mat-step>
+
+
+
+
+        </mat-horizontal-stepper>
+    </mat-dialog-content>
+</div>
